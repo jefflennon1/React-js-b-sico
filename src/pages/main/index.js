@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Api from '../../services/Api';
 
 export default class Main extends Component{
+
+  state = {
+    products:[],
+  }
+
   componentDidMount(){
     this.loadProducts();
   }
@@ -9,10 +14,18 @@ export default class Main extends Component{
   loadProducts = async ()=>{
     const res = await Api.get('/products');
 
-     console.log(res);
+     this.setState({products: res.data.docs});
+
+     console.log(res.data.docs);
   }
 
   render(){
-   return  <h1>Hello rocketseat</h1>
+   return (
+     <>
+      <div>
+          {this.state.products.map(product => <div key={product._id}>{product.title}  </div>)}
+      </div>
+     </>
+   )
   } 
 }
