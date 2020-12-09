@@ -40,3 +40,24 @@ a:hover{
   background-color: rgb(1, 1, 49);
   color: #fff;
 }
+
+.actions{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.actions button{
+  padding: 10px;
+  border-radius: 5px;
+  border: 0;
+  background:rgb(1, 1, 49);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.actions button:hover{
+  opacity: 0.7;
+}

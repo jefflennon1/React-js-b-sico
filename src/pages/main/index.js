@@ -33,6 +33,10 @@ export default class Main extends Component{
           </article>
           )
           )}
+          <div className="actions">
+            <button onClick={this.pervPage}>Anterior</button>
+            <button onClick={this.nextPage}>Próxima</button>
+          </div>
       </div>
      </>
    )
