@@ -7,19 +7,39 @@ export default class Main extends Component{
 
   state = {
     products:[],
+    productsInfo:{},
+    page:1
   }
 
   componentDidMount(){
     this.loadProducts();
   }
 
-  loadProducts = async ()=>{
-    const res = await Api.get('/products');
-     this.setState({products: res.data.docs});
+  loadProducts = async (page = 1)=>{
+    const response = await Api.get(`/products?page=${page}`);
+    const { docs, ...productsInfo } = response.data;
+    this.setState({ products: docs, productsInfo, page });
+    console.log(page);
   }
+  pervPage = ()=>{
+    const { page, productsInfo } = this.state;
+    if(page === 1) return;
 
+    const pageNumber = page - 1;
+
+    this.loadProducts(pageNumber);
+  };
+  nextPage = ()=>{
+    const { page, productsInfo } = this.state;
+
+    if(page === productsInfo.pages) return;
+
+    const pageNumber = page + 1;
+
+    this.loadProducts(pageNumber);
+  };
   render(){
-    const { products } = this.state;
+    const { products, page, productInfo} = this.state;
 
    return (
      <>
@@ -29,13 +49,13 @@ export default class Main extends Component{
           <article key={product._id}>
             <strong>{product.title}</strong>
             <p>{product.description}</p>
-            <a href="">Acessar</a>
+            {/* <a href="">Acessar</a> */}
           </article>
-          )
+          )     
           )}
           <div className="actions">
-            <button onClick={this.pervPage}>Anterior</button>
-            <button onClick={this.nextPage}>Próxima</button>
+            <button disabled={page === 1} onClick={this.pervPage}>Anterior</button>
+            <button disabled={page === productInfo.pages}  onClick={this.nextPage}>Próxima</button>
           </div>
       </div>
      </>
