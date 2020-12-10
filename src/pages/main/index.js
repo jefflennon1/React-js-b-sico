@@ -39,7 +39,7 @@ export default class Main extends Component{
     this.loadProducts(pageNumber);
   };
   render(){
-    const { products, page, productInfo} = this.state;
+    const { products, page, productsInfo} = this.state;
 
    return (
      <>
@@ -55,7 +55,7 @@ export default class Main extends Component{
           )}
           <div className="actions">
             <button disabled={page === 1} onClick={this.pervPage}>Anterior</button>
-            <button disabled={page === productInfo.pages}  onClick={this.nextPage}>Próxima</button>
+            <button disabled={page === productsInfo.pages}  onClick={this.nextPage}>Próxima</button>
           </div>
       </div>
      </>
